@@ -3,14 +3,14 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonButton, IonIcon, IonCard, IonCardContent, IonText, IonLoading
 } from '@ionic/react';
-import { happyOutline, smileOutline, removeCircleOutline, 
+import { happyOutline, sunnyOutline, removeCircleOutline, 
          sadOutline, alertCircleOutline, thunderstormOutline, closeOutline } from 'ionicons/icons';
 import { supabase } from '../supabaseClient';
 import './Home.css';
 
 const sentiments = [
   { level: 6, label: 'Muito Feliz', icon: happyOutline, color: '#22c55e', bg: '#dcfce7' },
-  { level: 5, label: 'Feliz', icon: smileOutline, color: '#84cc16', bg: '#ecfccb' },
+  { level: 5, label: 'Feliz', icon: sunnyOutline, color: '#84cc16', bg: '#ecfccb' },
   { level: 4, label: 'Bem', icon: removeCircleOutline, color: '#eab308', bg: '#fef9c3' },
   { level: 3, label: 'Preocupado', icon: sadOutline, color: '#f97316', bg: '#ffedd5' },
   { level: 2, label: 'Ansioso', icon: alertCircleOutline, color: '#ef4444', bg: '#fee2e2' },

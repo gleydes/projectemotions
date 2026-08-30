@@ -52,8 +52,9 @@
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
 
-.thermometer-icon {
+.thermometer-emoji {
   font-size: 40px;
+  line-height: 1;
   flex-shrink: 0;
 }
 

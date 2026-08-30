@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonButton, IonIcon, IonCard, IonCardContent, IonText, IonLoading
+  IonButton, IonCard, IonCardContent, IonText, IonLoading
 } from '@ionic/react';
-import { 
-  happyOutline, 
-  ellipseOutline, 
-  sadOutline, 
-  alertCircleOutline, 
-  thunderstormOutline, 
-  closeOutline 
-} from 'ionicons/icons';
+import { closeOutline } from 'ionicons/icons';
 import { supabase } from '../supabaseClient';
 import './Home.css';
 
 const sentiments = [
-  { level: 5, label: 'Sobrecarregado', icon: thunderstormOutline, color: '#dc2626', bg: '#fee2e2' },
-  { level: 4, label: 'Muito Ansioso', icon: alertCircleOutline, color: '#f97316', bg: '#ffedd5' },
-  { level: 3, label: 'Cansado', icon: sadOutline, color: '#eab308', bg: '#fef9c3' },
-  { level: 2, label: 'Bem', icon: ellipseOutline, color: '#84cc16', bg: '#ecfccb' },
-  { level: 1, label: 'Tranquilo', icon: happyOutline, color: '#22c55e', bg: '#dcfce7' },
+  { level: 5, label: 'Sobrecarregado', emoji: '😭', color: '#dc2626', bg: '#fee2e2' },
+  { level: 4, label: 'Muito Ansioso', emoji: '😰', color: '#f97316', bg: '#ffedd5' },
+  { level: 3, label: 'Cansado', emoji: '😔', color: '#eab308', bg: '#fef9c3' },
+  { level: 2, label: 'Bem', emoji: '😐', color: '#84cc16', bg: '#ecfccb' },
+  { level: 1, label: 'Tranquilo', emoji: '😊', color: '#22c55e', bg: '#dcfce7' },
 ];
 
 const Home: React.FC = () => {
@@ -106,7 +99,7 @@ const Home: React.FC = () => {
                   }}
                   onClick={() => handleSentimentClick(s.level)}
                 >
-                  <IonIcon icon={s.icon} className="thermometer-icon" style={{ color: s.color }} />
+                  <span className="thermometer-emoji">{s.emoji}</span>
                   <span className="thermometer-label" style={{ color: s.color }}>
                     <span className="thermometer-number">{s.level}</span> - {s.label}
                   </span>
@@ -138,7 +131,6 @@ const Home: React.FC = () => {
                   onClick={resetApp}
                   className="restart-btn"
                 >
-                  <IonIcon slot="start" icon={closeOutline} />
                   Registrar Novo Sentimento
                 </IonButton>
               </IonCardContent>

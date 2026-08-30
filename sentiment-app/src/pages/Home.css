@@ -2,11 +2,11 @@
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  padding: 20px 0;
+  padding: 20px 16px;
 }
 
 .question {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 8px;
@@ -15,56 +15,71 @@
 .subtitle {
   color: #6b7280;
   margin-bottom: 30px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.sentiment-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.sentiment-btn {
+/* Layout do Termômetro */
+.thermometer-list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 24px 16px;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.thermometer-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  padding: 16px 20px;
   border: 3px solid transparent;
-  border-radius: 20px;
+  border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  gap: 16px;
 }
 
-.sentiment-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+.thermometer-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-.sentiment-btn.selected {
-  transform: scale(1.05);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+.thermometer-item.selected {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
 
-.sentiment-label {
-  margin-top: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
+.thermometer-icon {
+  font-size: 40px;
+  flex-shrink: 0;
+}
+
+.thermometer-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.thermometer-number {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 500;
 }
 
 .anonymous-note {
   color: #9ca3af;
   font-size: 0.85rem;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
+/* Tela de agradecimento */
 .thanks-container {
   max-width: 500px;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 40px 16px;
 }
 
 .thanks-card {

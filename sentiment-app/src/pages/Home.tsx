@@ -95,20 +95,20 @@ const Home: React.FC = () => {
             <h2 className="question">Como você está se sentindo hoje?</h2>
             <p className="subtitle">Toque no emoji que melhor representa seu momento</p>
 
-            <div className="sentiment-grid">
+            <div className="thermometer-list">
               {sentiments.map((s) => (
                 <button
                   key={s.level}
-                  className={`sentiment-btn ${selectedSentiment === s.level ? 'selected' : ''}`}
+                  className={`thermometer-item ${selectedSentiment === s.level ? 'selected' : ''}`}
                   style={{ 
                     backgroundColor: s.bg,
                     borderColor: s.color 
                   }}
                   onClick={() => handleSentimentClick(s.level)}
                 >
-                  <IonIcon icon={s.icon} style={{ color: s.color, fontSize: '48px' }} />
-                  <span className="sentiment-label" style={{ color: s.color }}>
-                    {s.level} - {s.label}
+                  <IonIcon icon={s.icon} className="thermometer-icon" style={{ color: s.color }} />
+                  <span className="thermometer-label" style={{ color: s.color }}>
+                    <span className="thermometer-number">{s.level}</span> - {s.label}
                   </span>
                 </button>
               ))}

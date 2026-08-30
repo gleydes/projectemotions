@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -13,7 +12,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    // REMOVA qualquer configuração de format ou system
+    rollupOptions: {
+      output: {
+        format: 'es', // Força formato ESM
+      },
+    },
   },
   server: {
     port: 8100,

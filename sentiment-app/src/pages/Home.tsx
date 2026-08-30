@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonButton, IonIcon, IonCard, IonCardContent, IonText, IonLoading
 } from '@ionic/react';
-import { happyOutline, sunnyOutline, removeCircleOutline, 
-         sadOutline, alertCircleOutline, thunderstormOutline, closeOutline } from 'ionicons/icons';
+import { 
+  happyOutline, 
+  ellipseOutline, 
+  sadOutline, 
+  alertCircleOutline, 
+  thunderstormOutline, 
+  closeOutline 
+} from 'ionicons/icons';
 import { supabase } from '../supabaseClient';
 import './Home.css';
 
 const sentiments = [
-  { level: 6, label: 'Muito Feliz', icon: happyOutline, color: '#22c55e', bg: '#dcfce7' },
-  { level: 5, label: 'Feliz', icon: sunnyOutline, color: '#84cc16', bg: '#ecfccb' },
-  { level: 4, label: 'Bem', icon: removeCircleOutline, color: '#eab308', bg: '#fef9c3' },
-  { level: 3, label: 'Preocupado', icon: sadOutline, color: '#f97316', bg: '#ffedd5' },
-  { level: 2, label: 'Ansioso', icon: alertCircleOutline, color: '#ef4444', bg: '#fee2e2' },
-  { level: 1, label: 'Nervoso', icon: thunderstormOutline, color: '#dc2626', bg: '#fecaca' },
+  { level: 5, label: 'Sobrecarregado', icon: thunderstormOutline, color: '#dc2626', bg: '#fee2e2' },
+  { level: 4, label: 'Muito Ansioso', icon: alertCircleOutline, color: '#f97316', bg: '#ffedd5' },
+  { level: 3, label: 'Cansado', icon: sadOutline, color: '#eab308', bg: '#fef9c3' },
+  { level: 2, label: 'Bem', icon: ellipseOutline, color: '#84cc16', bg: '#ecfccb' },
+  { level: 1, label: 'Tranquilo', icon: happyOutline, color: '#22c55e', bg: '#dcfce7' },
 ];
 
 const Home: React.FC = () => {
@@ -37,7 +42,6 @@ const Home: React.FC = () => {
     setSelectedSentiment(level);
 
     try {
-      // Salvar no Supabase
       const { error } = await supabase
         .from('sentiment_records')
         .insert([{ 
@@ -47,7 +51,6 @@ const Home: React.FC = () => {
 
       if (error) throw error;
 
-      // Buscar mensagem aleatória de apoio
       const { data: messages, error: msgError } = await supabase
         .from('support_messages')
         .select('message')
@@ -105,7 +108,7 @@ const Home: React.FC = () => {
                 >
                   <IonIcon icon={s.icon} style={{ color: s.color, fontSize: '48px' }} />
                   <span className="sentiment-label" style={{ color: s.color }}>
-                    {s.label}
+                    {s.level} - {s.label}
                   </span>
                 </button>
               ))}

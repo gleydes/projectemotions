@@ -1,5 +1,5 @@
 // src/apiClient.ts
-const API_URL = import.meta.env.VITE_API_URL || '/api/save';
+const API_URL = '/api/save';  // <-- Chama a própria Vercel, NÃO o Google direto
 
 export const saveSentiment = async (data: {
   sentiment_level: number;

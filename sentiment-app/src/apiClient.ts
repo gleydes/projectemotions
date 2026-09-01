@@ -1,13 +1,12 @@
 // src/apiClient.ts
-const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL 
-  || 'https://script.google.com/macros/s/SEU_ID_AQUI/exec';
+const API_URL = import.meta.env.VITE_API_URL || '/api/save';
 
 export const saveSentiment = async (data: {
   sentiment_level: number;
   sentiment_label: string;
   session_id: string;
 }) => {
-  const response = await fetch(GOOGLE_SCRIPT_URL, {
+  const response = await fetch(API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,8 +18,6 @@ export const saveSentiment = async (data: {
 };
 
 export const getSupportMessage = async (): Promise<string> => {
-  // Como não temos mais Supabase, vamos usar mensagens locais
-  // ou podemos criar outra aba na planilha para mensagens
   const messages = [
     'Você está no caminho certo! Cada dia é uma nova oportunidade.',
     'Sua felicidade contagia! Aproveite esse momento.',

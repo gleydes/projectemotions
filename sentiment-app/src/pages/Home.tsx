@@ -4,7 +4,7 @@ import {
   IonButton, IonCard, IonCardContent, IonText, IonLoading
 } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
-import { supabase } from '../supabaseClient';
+import { saveSentiment, getSupportMessage } from '../apiClient';
 import './Home.css';
 
 const sentiments = [
@@ -31,40 +31,34 @@ const Home: React.FC = () => {
   };
 
   const handleSentimentClick = async (level: number) => {
-    setLoading(true);
-    setSelectedSentiment(level);
+  setLoading(true);
+  setSelectedSentiment(level);
 
-    try {
-      const { error } = await supabase
-        .from('sentiment_records')
-        .insert([{ 
-          sentiment_level: level, 
-          session_id: getSessionId() 
-        }]);
+  try {
+    // Salvar no Google Sheets via Apps Script
+    const result = await saveSentiment({
+      sentiment_level: level,
+      sentiment_label: sentiments.find(s => s.level === level)?.label || '',
+      session_id: getSessionId(),
+    });
 
-      if (error) throw error;
-
-      const { data: messages, error: msgError } = await supabase
-        .from('support_messages')
-        .select('message')
-        .eq('active', true);
-
-      if (msgError) throw msgError;
-
-      if (messages && messages.length > 0) {
-        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-        setSupportMessage(randomMsg.message);
-      }
-
-      setShowThanks(true);
-    } catch (err) {
-      console.error('Erro:', err);
-      setSupportMessage('Obrigado por compartilhar! Cuide-se bem. 💚');
-      setShowThanks(true);
-    } finally {
-      setLoading(false);
+    if (result.status !== 'success') {
+      throw new Error(result.message);
     }
-  };
+
+    // Buscar mensagem de apoio
+    const msg = await getSupportMessage();
+    setSupportMessage(msg);
+
+    setShowThanks(true);
+  } catch (err) {
+    console.error('Erro:', err);
+    setSupportMessage('Obrigado por compartilhar! Cuide-se bem. 💚');
+    setShowThanks(true);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const resetApp = () => {
     setShowThanks(false);

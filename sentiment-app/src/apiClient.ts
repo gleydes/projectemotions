@@ -1,5 +1,4 @@
-// src/apiClient.ts
-const API_URL = '/api/save';  // <-- Chama a própria Vercel, NÃO o Google direto
+const API_URL = '/api/save';
 
 export const saveSentiment = async (data: {
   sentiment_level: number;
@@ -13,6 +12,10 @@ export const saveSentiment = async (data: {
     },
     body: JSON.stringify(data),
   });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
   return response.json();
 };
